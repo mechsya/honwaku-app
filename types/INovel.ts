@@ -10,6 +10,29 @@ export interface INovel {
   sinopsis: string;
   isRecomended: boolean;
   view: number;
+  chapter: IChapter[];
+  comment: IComment[];
+  created_at: string;
+  updated_at: string;
+}
+
+export interface IComment {
+  id: number;
+  user_id: number;
+  novel_id: number;
+  content: string;
+  like: number;
+}
+
+export interface IChapter {
+  id: number;
+  novel_id: number;
+  slug: string;
+  title: string;
+  volume: number;
+  chapter: number;
+  content: string;
+  view: number;
   created_at: string;
   updated_at: string;
 }

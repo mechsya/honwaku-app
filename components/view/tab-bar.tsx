@@ -17,7 +17,7 @@ const TabBar = () => {
           className={cn(
             "p-4 flex-1",
             item == renderComponent
-              ? "border-b-2 border-blue-400"
+              ? "border-b-2 border-primary"
               : "border-b-2 border-transparent"
           )}
         >

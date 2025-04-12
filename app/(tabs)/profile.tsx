@@ -22,7 +22,7 @@ export default function Page() {
             <Text className="font-robotoSemibold text-black">
               Miko Meysa Bima
             </Text>
-            <Text className="font-roboto text-black/70">
+            <Text className="font-roboto text-black/50">
               alinia.meysa@gmail.com
             </Text>
             <View className="flex-row items-center gap-2">
@@ -50,7 +50,7 @@ export default function Page() {
             </TouchableOpacity>
           )}
         />
-        <Text className="text-center font-roboto text-black/70 p-4">
+        <Text className="text-center font-roboto text-black/50 p-4">
           App Version V1.0.0
         </Text>
       </View>

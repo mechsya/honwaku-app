@@ -22,7 +22,7 @@ function ItemAnouncement(props: any) {
       <Text className="font-serif text-lg text-black">
         Dibutuhkan developer react native
       </Text>
-      <Text className="font-roboto text-black/60 text-sm">
+      <Text className="font-roboto text-black/50 text-sm">
         <Text className="text-red-400">Penting</Text> &bull; Diupload 28 Janury
         2025
       </Text>

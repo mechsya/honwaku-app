@@ -9,10 +9,7 @@ export default function NavigationBottom() {
 
   return (
     <View className="w-full bg-white flex-row absolute bottom-0 border-y border-black/10">
-      <TouchableOpacity
-        onPress={() => chapterRef.current?.expand()}
-        className="p-3 flex-1 flex-row gap-3 items-center"
-      >
+      <TouchableOpacity className="p-3 flex-1 flex-row gap-3 items-center">
         <Icon name={"format-list-bulleted"} size={20} color={COLOR.BLACK} />
         <View>
           <Text numberOfLines={1} className="font-roboto text-black">

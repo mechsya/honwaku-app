@@ -1,6 +1,7 @@
+import { cn } from "@/components/cn";
 import Container from "@/components/container";
 import { style } from "@/components/explore/filter";
-import Seperator from "@/components/seperator";
+import Loading from "@/components/loading";
 import Chapter from "@/components/view/chapter";
 import Comment from "@/components/view/comment";
 import Description from "@/components/view/description";
@@ -10,50 +11,80 @@ import Novel from "@/components/view/novel";
 import TabBar from "@/components/view/tab-bar";
 import Tag from "@/components/view/tag";
 import { _renderComponent } from "@/hooks/view";
+import { INovel } from "@/types/INovel";
+import { get } from "@/utils/fetch";
 import BottomSheet, { BottomSheetView } from "@gorhom/bottom-sheet";
+import { useLocalSearchParams } from "expo-router";
 import { useAtomValue } from "jotai";
-import { useMemo } from "react";
-import { Image, ScrollView, Text, View } from "react-native";
+import { useEffect, useMemo, useState } from "react";
+import { Alert, Image, ScrollView, Text, View } from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
+
+export function colorStatus(status: string | undefined) {
+  switch (status) {
+    case "end":
+      return "bg-red-400";
+    case "ongoing":
+      return "bg-green-500";
+    default:
+      return "bg-blue-400";
+  }
+}
 
 export default function ViewScreen() {
   const renderComponent = useAtomValue(_renderComponent);
+  const params = useLocalSearchParams();
+  const [novel, setNovel] = useState<INovel>();
+  const [loading, setLoading] = useState<boolean>(true);
+  const snapPoints = useMemo(() => ["30%", "50%", "100%"], []);
 
-  return (
+  useEffect(() => {
+    get({ url: "novel/" + params.slug })
+      .then(setNovel)
+      .catch(() => Alert.alert("error"))
+      .finally(() => setLoading(!loading));
+  }, []);
+
+  return loading ? (
+    <Loading />
+  ) : (
     <GestureHandlerRootView>
       <Container>
         <Navbar />
         <ScrollView>
-          <View className="w-full h-5 bg-blue-400" />
-          <View className="p-4 flex-row border-b border-black/10">
+          <View className={cn("w-full h-2", colorStatus(novel?.status))} />
+          <View className="p-4 flex-row border-b gap-2 border-black/10">
             <View className="flex-1">
               <Text className="font-serif text-lg text-black">
-                Mushoku Tensei: Isekai Ittara Honki Dasu
+                {novel?.title}
               </Text>
-              <Text className="text-black/70 my-2 font-roboto">
-                Author : Miko Meysa
+              <Text className="text-black/50 mb-2 font-roboto">
+                Author : {novel?.author}
               </Text>
-              <Tag items={["Fantasy", "Romance", "Comedy", "SOL"]} />
             </View>
             <Image
-              style={{ width: 85, height: 120 }}
+              style={{ width: 65, height: 90 }}
               className="border border-black"
               source={{
-                uri: "https://images-cdn.ubuy.co.id/678dd84b095ace31782df0a5-mushoku-tensei-jobless-reincarnation.jpg",
+                uri: novel?.cover_url,
               }}
             />
           </View>
-          <InfoBar />
-          <Description />
+          <InfoBar
+            ranting={novel?.ranting}
+            view={novel?.view}
+            slug={novel?.slug}
+          />
+          <Description description={novel?.sinopsis} />
           <Novel />
+          <View className="w-full h-32"></View>
         </ScrollView>
       </Container>
-      <BottomSheet
-        snapPoints={useMemo(() => ["10%", "100%"], [])}
-        style={style.bottomSheetContainer}
-      >
+      <BottomSheet snapPoints={snapPoints} style={style.bottomSheetContainer}>
         <TabBar />
-        {renderComponent === "chapter" ? <Chapter /> : null}
+        {renderComponent === "chapter" ? (
+          <Chapter chapters={novel?.chapter} />
+        ) : null}
         {renderComponent === "komentar" ? <Comment /> : null}
       </BottomSheet>
     </GestureHandlerRootView>

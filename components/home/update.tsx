@@ -19,10 +19,10 @@ function ItemUpdate(props: any) {
   return (
     <TouchableOpacity className="py-3 border-b border-black/10">
       <Text className="font-serif text-lg text-black">{props.title}</Text>
-      <Text className="font-robotoSemibold text-black py-1 text-md">
+      <Text className="font-robotoSemibold pb-1 text-black/70">
         {props.series}
       </Text>
-      <Text className="font-roboto text-black/60 text-sm">
+      <Text className="font-roboto text-black/50 text-sm">
         <Text className="text-red-400">Baru</Text> &bull; {props.genre} &bull;{" "}
         {props.character_count} Karakter &bull; Diupload {props.created_at}
       </Text>

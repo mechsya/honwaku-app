@@ -4,7 +4,6 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { _filterRef } from "@/hooks/explore";
 import { useSetAtom } from "jotai";
 import { cn } from "../cn";
-import Checkbox from "../ui/checkbox";
 import Genre from "./genre";
 import Release from "./release";
 import Status from "./status";

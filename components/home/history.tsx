@@ -11,10 +11,10 @@ export default function History() {
             Surviving in a Romance Fantasy Novel – Chapter 159: The Plague
             Demonic Spirit Part 4
           </Text>
-          <Text className="font-robotoSemibold text-black py-1 text-md">
+          <Text className="font-roboto text-black/70 py-1">
             Mushoku Tensei: Isekai Ittara Honki Dasu
           </Text>
-          <Text className="text-base opacity-50 font-roboto">
+          <Text className="text-base text-black/50 font-roboto">
             Dibaca 20 menit yang lalu
           </Text>
         </TouchableOpacity>

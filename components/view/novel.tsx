@@ -4,9 +4,9 @@ import Seperator from "../seperator";
 export default function Novel() {
   return (
     <View className="px-4">
-      <Seperator TextclassName="text-base" label="Novel Rekomendasi Lainya" />
+      <Seperator label="Novel Rekomendasi Lainya" />
       <FlatList
-        data={["", "", "", "", "", ""]}
+        data={[""]}
         horizontal
         showsHorizontalScrollIndicator={false}
         ItemSeparatorComponent={() => <View className="w-2" />}
